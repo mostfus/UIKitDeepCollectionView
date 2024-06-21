@@ -103,7 +103,7 @@ extension InsertionSortViewController {
             let item = NSCollectionLayoutItem(layoutSize: size)
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .absolute(rowHeight))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columns)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: columns)
             let section = NSCollectionLayoutSection(group: group)
             return section
         }

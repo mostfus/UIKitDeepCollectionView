@@ -60,9 +60,9 @@ extension NestedGroupsViewController {
             trailingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
             let trailingGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3),
-                                                  heightDimension: .fractionalHeight(1.0)),
-                subitem: trailingItem, count: 2)
-
+                                                   heightDimension: .fractionalHeight(1.0)),
+                repeatingSubitem: trailingItem,
+                count: 2)
             let nestedGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                   heightDimension: .fractionalHeight(0.4)),

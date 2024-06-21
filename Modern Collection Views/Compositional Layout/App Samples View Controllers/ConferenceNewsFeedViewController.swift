@@ -74,7 +74,7 @@ extension ConferenceNewsFeedViewController {
                                                heightDimension: .estimated(estimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: layoutSize)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSize,
-                                                       subitem: item,
+                                                       repeatingSubitem: item,
                                                        count: 1)
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)

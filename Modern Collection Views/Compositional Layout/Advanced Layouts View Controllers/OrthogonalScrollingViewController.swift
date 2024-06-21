@@ -56,8 +56,9 @@ extension OrthogonalScrollingViewController {
             trailingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
             let trailingGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3),
-                                                  heightDimension: .fractionalHeight(1.0)),
-                subitem: trailingItem, count: 2)
+                                                   heightDimension: .fractionalHeight(1.0)),
+                repeatingSubitem: trailingItem,
+                count: 2)
 
             let containerGroup = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85),

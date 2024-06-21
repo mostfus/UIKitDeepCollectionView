@@ -77,10 +77,11 @@ extension OrthogonalScrollBehaviorViewController {
             let trailingItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.3)))
             trailingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-            let trailingGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(1.0)),
-                                                                 subitem: trailingItem,
-                                                                 count: 2)
+            let trailingGroup = NSCollectionLayoutGroup.vertical(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3),
+                                                   heightDimension: .fractionalHeight(1.0)),
+                repeatingSubitem: trailingItem,
+                count: 2)
 
             let orthogonallyScrolls = sectionKind.orthogonalScrollingBehavior() != .none
             let containerGroupFractionalWidth = orthogonallyScrolls ? CGFloat(0.85) : CGFloat(1.0)

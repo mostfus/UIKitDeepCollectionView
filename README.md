@@ -69,7 +69,7 @@ let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                       heightDimension: .absolute(44))
-let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 2)
 let spacing = CGFloat(10)
 group.interItemSpacing = .fixed(spacing)
 ```
@@ -98,7 +98,7 @@ let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
         NSCollectionLayoutDimension.fractionalWidth(0.2)
     let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                           heightDimension: groupHeight)
-    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columns)
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: columns)
 
     let section = NSCollectionLayoutSection(group: group)
     section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
@@ -128,8 +128,7 @@ let layout = UICollectionViewCompositionalLayout {
         NSCollectionLayoutDimension.absolute(44) : NSCollectionLayoutDimension.fractionalWidth(0.2)
     let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                            heightDimension: groupHeight)
-    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columns)
-
+    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: columns)
     let section = NSCollectionLayoutSection(group: group)
     section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
     return section
@@ -269,9 +268,9 @@ let trailingItem = NSCollectionLayoutItem(
 trailingItem.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
 let trailingGroup = NSCollectionLayoutGroup.vertical(
     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3),
-                                      heightDimension: .fractionalHeight(1.0)),
-    subitem: trailingItem, count: 2)
-
+                                       heightDimension: .fractionalHeight(1.0)),
+    repeatingSubitem: trailingItem,
+    count: 2)
 let nestedGroup = NSCollectionLayoutGroup.horizontal(
     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                       heightDimension: .fractionalHeight(0.4)),

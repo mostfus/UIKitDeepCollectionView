@@ -178,7 +178,7 @@ extension EmojiExplorerViewController {
             content.textProperties.alignment = .center
             content.directionalLayoutMargins = .zero
             cell.contentConfiguration = content
-            var background = UIBackgroundConfiguration.listPlainCell()
+            var background = UIBackgroundConfiguration.listCell()
             background.cornerRadius = 8
             background.strokeColor = .systemGray3
             background.strokeWidth = 1.0 / cell.traitCollection.displayScale
