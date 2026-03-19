@@ -20,6 +20,14 @@ final class PinchLayout: UICollectionViewFlowLayout {
 //            invalidateLayout()
 //        }
 
+    override init() {
+        super.init()
+        itemSize = CGSize(width: 200, height: 100)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // Прояснить - зачем его вызывать а не для конкретного item???
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let attributes = super.layoutAttributesForElements(in: rect)

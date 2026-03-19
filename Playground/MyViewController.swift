@@ -10,7 +10,7 @@ final class MyViewController: UIViewController {
     private var collectionView: UICollectionView!
     
     private var items: [MyCustomItem] = {
-        (0...25).map { num in
+        (0...10).map { num in
             MyCustomItem(num: num)
         }
     }()
@@ -27,26 +27,27 @@ final class MyViewController: UIViewController {
         button.setTitle("⬆️", for: .normal)
         
         button.addAction(UIAction(handler: { _ in
+            self.handleButtonTap()
         }), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .green.withAlphaComponent(0.5)
         configureCollectionView()
         setupUI()
         setupPinch()
     }
     
-    private var layout: UICollectionViewFlowLayout!
+    private func handleButtonTap() {
+
+    }
     
     private func configureCollectionView() {
         let layout = PinchLayout()
+        layout.scrollDirection = .vertical
         let collettionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        self.layout = layout
-        let siz = sizes
-        layout.itemSize = siz.randomElement()!
         self.collectionView = collettionView
 
         collettionView.delegate = self
@@ -62,10 +63,10 @@ final class MyViewController: UIViewController {
         circleButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(circleButton)
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             
             circleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             circleButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
@@ -121,6 +122,14 @@ final class MyViewController: UIViewController {
 }
 
 extension MyViewController: UICollectionViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("UICollectionView.frame = \(collectionView.frame)")
+        print("UICollectionView.bounds = \(collectionView.bounds)")
+        print("ContentOffset: \(collectionView.contentOffset)")
+        print("CollectionViewContentSize = \(collectionView.contentSize)")
+        print("CollectionViewContentInset = \(collectionView.contentInset)")
+    }
 }
 
 extension MyViewController: UICollectionViewDataSource {
@@ -132,12 +141,13 @@ extension MyViewController: UICollectionViewDataSource {
         let cell: MyCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.reuseIdentifier, for: indexPath) as! MyCollectionViewCell
         
         cell.configure(title: "\(items[indexPath.row].num)")
+        cell.backgroundColor = .gray
         return cell
     }
 }
 
-extension MyViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: 100)
-    }
-}
+//extension MyViewController: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        CGSize(width: collectionView.bounds.width, height: 100)
+//    }
+//}
