@@ -5,13 +5,25 @@ import UIKit
 final class LineViewController: UIViewController {
     private var collectionView: UICollectionView!
     
-    private var cellCount = 20
+    private var cellCount = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureCollectionView()
         setupUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+            print("UICollectionView.frame = \(collectionView.frame)")
+            print("UICollectionView.bounds = \(collectionView.bounds)")
+            print("ContentOffset: \(collectionView.contentOffset)")
+            print("CollectionViewContentSize = \(collectionView.contentSize)")
+            print("CollectionViewContentInset = \(collectionView.contentInset)")
+        }
     }
     
     private func configureCollectionView() {
@@ -30,15 +42,22 @@ final class LineViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
     }
 }
 
 extension LineViewController: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        print("UICollectionView.frame = \(collectionView.frame)")
+//        print("UICollectionView.bounds = \(collectionView.bounds)")
+//        print("ContentOffset: \(collectionView.contentOffset)")
+//        print("CollectionViewContentSize = \(collectionView.contentSize)")
+//        print("CollectionViewContentInset = \(collectionView.contentInset)")
+    }
     
 }
 

@@ -374,7 +374,7 @@
 		FC1019AD2F61E54200F893AD /* Playground */ = {
 			isa = PBXGroup;
 			children = (
-				FC1D7F3A2F67251000564D11 /* CustomLaouts */,
+				FC1D7F3A2F67251000564D11 /* CustomLaoyuts */,
 				FC1D7F372F65842D00564D11 /* Layout */,
 				FC1019AF2F61E58700F893AD /* MyViewController.swift */,
 				FC1019B12F61E5CB00F893AD /* MyCollectionViewCell.swift */,
@@ -390,13 +390,13 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
-		FC1D7F3A2F67251000564D11 /* CustomLaouts */ = {
+		FC1D7F3A2F67251000564D11 /* CustomLaoyuts */ = {
 			isa = PBXGroup;
 			children = (
 				FC1D7F3B2F67252400564D11 /* LineViewController.swift */,
 				FC1D7F3D2F67253000564D11 /* LineCollectionViewLayout.swift */,
 			);
-			path = CustomLaouts;
+			path = CustomLaoyuts;
 			sourceTree = "<group>";
 		};
 		FD20C3CE2268DA5200935CB2 /* Controllers */ = {

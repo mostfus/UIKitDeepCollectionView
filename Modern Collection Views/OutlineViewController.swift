@@ -47,8 +47,8 @@ class OutlineViewController: UIViewController {
     private lazy var menuItems: [OutlineItem] = {
         return [
             OutlineItem(
-                title: "MyViewController",
-                viewController: MyViewController.self
+                title: "LineViewController",
+                viewController: LineViewController.self
             ),
             OutlineItem(title: "Compositional Layout", subitems: [
                 OutlineItem(title: "Getting Started", subitems: [
