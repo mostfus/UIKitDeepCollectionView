@@ -97,43 +97,36 @@ class LineCollectionViewLayout: UICollectionViewFlowLayout {
         return attributes
     }
     
-//    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-//        guard let collectionView else {
-//            return super.layoutAttributesForItem(at: indexPath)
-//        }
-//        let attributes = super.layoutAttributesForItem(at: indexPath)
-//        var visibleRect = CGRect()
-//        visibleRect.origin = collectionView.contentOffset
-//        visibleRect.size = collectionView.bounds.size
+    override func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = layoutAttributesForItem(at: itemIndexPath)
+        guard let attributes else { return nil }
+        attributes.center = CGPoint(x: attributes.center.x + 200, y: attributes.center.y)
+        attributes.alpha = 0.1
+        
+        return attributes
+    }
+    
+//    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+//        guard let collectionView else { return proposedContentOffset }
+//        var offsetAdjustment = CGFloat.greatestFiniteMagnitude
+//        let verticalCenter = proposedContentOffset.y + (collectionView.bounds.size.height / 2.0)
+//        let targetRect = CGRect(
+//            x: 0,
+//            y: proposedContentOffset.y,
+//            width: collectionView.bounds.size.width,
+//            height: collectionView.bounds.size.height
+//        )
 //        
-//        if CGRectIntersectsRect(attributes.frame, rect) {
-//            let distance = CGRectGetMidX(visibleRect) - attributes.center.x
-//            let normalizedDistance = distance / activeDistance // TODO: Что это такое? понять
-//            if abs(distance) < activeDistance {
-//                let zoom = 1 + zoomFactor * (1 * abs(normalizedDistance))
-//                cellAttributes.transform3D = CATransform3DMakeScale(zoom, zoom, 1)
-//                cellAttributes.zIndex = Int(round(zoom))
+//        let attributes = super.layoutAttributesForElements(in: targetRect)
+//        for attribute in attributes ?? [] {
+//            let itemVerticalCenter = attribute.center.y
+//            if abs(verticalCenter - itemVerticalCenter) < abs(offsetAdjustment) {
+//                offsetAdjustment = itemVerticalCenter - verticalCenter
 //            }
 //        }
 //        
-//        return attributes
+//        return CGPoint(x: proposedContentOffset.x, y: proposedContentOffset.y + offsetAdjustment)
 //    }
     
-    /*
-     
-      contentOffset  — это свойство  UIScrollView  (а значит и  UICollectionView ), которое описывает, насколько содержимое прокручено относительно его собственной системы координат.
-     Связь  contentOffset  и  bounds.origin
-     У  UIScrollView  (и наследников) есть особенность:
-      contentOffset  всегда равен  bounds.origin , то есть верхний‑левый угол «видимого окна» в системе координат  contentView  задаётся именно через  contentOffset .
-     Эквивалентно можно думать так:
-         •     bounds  — это «окно», через которое мы смотрим на контент.
-         •     bounds.origin  — точка в системе координат контента, которая попадает в верхний‑левый угол этого окна.
-         •     contentOffset  — просто удобное имя/alias для этого же значения (только как  CGPoint , без ширины/высоты).
-     
-     
-     TODO: - разобрать что такое видимая область, contentOffset и другие размеры CollectionView
-     
-     
-     TODO: - Хорошо разобрать LayoutAttributes - так как обычно можно мыслить о настройках отображаемого item через это
-     */
+    
 }

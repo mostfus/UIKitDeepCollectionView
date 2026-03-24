@@ -5,13 +5,24 @@ import UIKit
 final class LineViewController: UIViewController {
     private var collectionView: UICollectionView!
     
-    private var cellCount = 10
+    private var dataSource: [Int] = {
+        (1...20).map {
+            $0
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureCollectionView()
         setupUI()
+        
+//        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapHandler)))
+    }
+    
+    @objc
+    private func tapHandler(_ sender: UITapGestureRecognizer) {
+        print("Hello")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,18 +74,24 @@ extension LineViewController: UICollectionViewDelegate {
 
 extension LineViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        cellCount
+        dataSource.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.reuseIdentifier, for: indexPath) as! MyCollectionViewCell
-        cell.configure(title: "\(indexPath.row)")
+        cell.configure(title: "\(dataSource[indexPath.row])")
         cell.contentView.backgroundColor = .gray
         cell.contentView.layer.cornerRadius = 16
         cell.contentView.layer.masksToBounds = true
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.performBatchUpdates { [weak self] in
+            guard let self else { return }
+            dataSource.remove(at: indexPath.row)
+            collectionView.deleteItems(at: [indexPath])
+        }
+    }
 }
 

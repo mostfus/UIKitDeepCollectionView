@@ -50,6 +50,10 @@ class OutlineViewController: UIViewController {
                 title: "LineViewController",
                 viewController: LineViewController.self
             ),
+            OutlineItem(
+                title: "MyViewController",
+                viewController: MyViewController.self
+            ),
             OutlineItem(title: "Compositional Layout", subitems: [
                 OutlineItem(title: "Getting Started", subitems: [
                     OutlineItem(title: "Grid", viewController: GridViewController.self),
@@ -192,8 +196,25 @@ extension OutlineViewController: UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
         
         if let viewController = menuItem.outlineViewController {
-            navigationController?.pushViewController(viewController.init(), animated: true)
+            if let vc = viewController.init() as? CheckoutViewController {
+                vc.delegate = self
+                navigationController?.pushViewController(vc, animated: true)
+            } else {
+                navigationController?.pushViewController(viewController.init(), animated: true)
+            }
         }
         
     }
+}
+
+extension OutlineViewController: CheckoutViewControllerDelegate {
+    func checkoutDidComplete(with deepLinkURL: URL) {
+        print(deepLinkURL.description)
+    }
+    
+    func checkoutDidCancel() {
+        print("checkoutDidCancel")
+    }
+    
+    
 }
